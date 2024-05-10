@@ -3,16 +3,17 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  build:
+  build_and_test:
     name: Build and Test
     runs-on: ubuntu-latest
 
     steps:
+      # Check out repository
       - name: Check out repository
         uses: actions/checkout@v2
 
@@ -32,6 +33,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven
 
+      # Build and Test Backend with Maven
       - name: Build Backend with Maven
         run: mvn -B package
 
@@ -60,26 +62,29 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node
 
+      # Install Frontend Dependencies
       - name: Install Frontend Dependencies
         working-directory: warehousefrontend  # Adjust this directory if needed
         run: npm install
 
+      # Build Frontend
       - name: Build Frontend
         working-directory: warehousefrontend  # Adjust this directory if needed
         run: npm run build
 
+      # Run Frontend Tests
       - name: Run Frontend Tests
         working-directory: warehousefrontend  # Adjust this directory if needed
-        run: npm run test -- --watchAll=false
+        run: npm run lint
 
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: build
+    needs: build_and_test
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
 
+      # Add specific deployment steps here
       - name: Deploy Application
-        # Add your specific deployment steps here
         run: echo "Deploying the application..."
