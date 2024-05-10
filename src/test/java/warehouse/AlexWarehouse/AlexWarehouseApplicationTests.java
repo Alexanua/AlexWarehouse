@@ -9,5 +9,4 @@ class AlexWarehouseApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }
