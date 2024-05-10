@@ -38,6 +38,13 @@ jobs:
       - name: Run Backend Tests
         run: mvn -B test -f pom.xml  # Adjust the path as necessary
 
+      - name: Upload Surefire Reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
+
       # Set up Node.js for frontend
       - name: Set up Node.js
         uses: actions/setup-node@v3
