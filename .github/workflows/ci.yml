@@ -71,21 +71,3 @@ jobs:
       - name: Test Frontend
         working-directory: warehousefrontend
         run: npm test
-
-  deploy:
-    name: Deploy to Server
-    needs: [build-backend, build-frontend]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-
-      - name: Deploy Backend
-        run: |
-          # Exempel på kommando för att distribuera backend
-          scp -r AlexWarehouse/ användare@server:/sökväg/till/distribution/backend
-
-      - name: Deploy Frontend
-        run: |
-          # Exempel på kommando för att distribuera frontend
-          scp -r warehousefrontend/dist användare@server:/sökväg/till/distribution/frontend
