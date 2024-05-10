@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "message": "Product 'rahaf' is low on stock.",
+    "icon": "warning",
+    "color": "orange"
+  },
+  {
+    "id": 2,
+    "message": "Product 'majdi2' has expired.",
+    "icon": "warning",
+    "color": "red"
+  }
+]
