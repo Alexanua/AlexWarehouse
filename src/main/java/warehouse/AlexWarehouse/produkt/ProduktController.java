@@ -34,17 +34,27 @@ public class ProduktController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProdukt);
     }
 
+
     @PutMapping("/updateProdukt/{id}")
-    public ResponseEntity<Produkt> updateProdukt(@PathVariable Long id, @RequestBody Produkt produkt) {
+    public ResponseEntity<?> updateProdukt(@PathVariable Long id, @RequestBody Produkt produkt) {
+        if (id == null) {
+            return ResponseEntity.badRequest().body("Product ID is missing in the path. Cannot update the product.");
+        }
+
         Optional<Produkt> existingProdukt = produktService.getProduktById(id);
         if (existingProdukt.isPresent()) {
-            produkt.setId(id);
+            produkt.setId(id); // Ensure the product has the correct ID
             Produkt updatedProdukt = produktService.updateProdukt(produkt);
             return ResponseEntity.ok(updatedProdukt);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+
+
+
 
     @DeleteMapping("/deleteProdukt/{id}")
     public ResponseEntity<Void> deleteProdukt(@PathVariable Long id) {

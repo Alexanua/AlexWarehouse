@@ -1,59 +1,68 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import '../styles/UpdateProductComponent.css';
+import { getProductById, updateProduct } from '../service/productService'; // Importera funktionerna från productService
 
 const UpdateProductComponent = () => {
     const { productId } = useParams(); // This matches the route parameter
-    const navigate = useNavigate();
-    const API_BASE_URL = 'http://localhost:8081/produkter';
+    const navigate = useNavigate(); // Navigation hook for redirection
 
+    // Initialize the product state with default values
     const [product, setProduct] = useState({
         namn: '',
         beskrivning: '',
-        pris: 0, // initialized as a number
-        lagerAntal: 0, // initialized as a number
+        pris: 0,
+        lagerAntal: 0,
         kategori: '',
-        vikt: 0, // initialized as a number
+        vikt: 0,
         utgångsdatum: '',
         bildUrl: '',
         status: '',
         dimensioner: '',
         färg: '',
         material: '',
-        betyg: 0, // initialized as a number
+        betyg: 0,
         tillverkningsland: '',
-        supplierId: 0 // initialized as a number
+        supplierId: 0
     });
 
+    // Fetch the product details when the component mounts or productId changes
     useEffect(() => {
+        console.log("Product ID:", productId);  // Log product ID for verification
         if (productId) {
-            axios.get(`${API_BASE_URL}/getProduktById/${productId}`)
-                .then(response => {
-                    setProduct(response.data);
+            getProductById(productId)
+                .then(data => {
+                    setProduct(data); // Set the product state with data from the response
                 })
-                .catch(error => console.error('Error fetching product details:', error));
+                .catch(error => {
+                    console.error('Error fetching product details:', error);
+                    alert('Could not fetch product details.');
+                });
+        } else {
+            console.log("No product ID found.");  // Log if no product ID is found
         }
-    }, [productId, API_BASE_URL]);
+    }, [productId]);
 
+    // Handle input changes for each form field
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProduct(prev => ({ ...prev, [name]: value }));
     };
 
+    // Handle form submission to update the product
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (productId) {
-            axios.put(`${API_BASE_URL}/updateProdukt/${productId}`, product)
-                .then(() => {
-                    alert('Product updated successfully');
-                    navigate('/products'); // Navigate to product listing after update
-                })
-                .catch(error => {
-                    console.error('Failed to update product:', error);
-                    alert('Failed to update product');
-                });
-        } else {
+        if (!productId) {
             alert('Product ID is missing. Cannot update the product.');
+            return;
+        }
+        try {
+            await updateProduct(productId, product);
+            alert('Product updated successfully');
+            navigate('/products'); // Redirect to the products page after successful update
+        } catch (error) {
+            console.error('Failed to update product:', error);
+            alert('Failed to update product');
         }
     };
 

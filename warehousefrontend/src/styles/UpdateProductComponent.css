@@ -1,0 +1,66 @@
+/* UpdateProductComponent.css */
+
+.update-product-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #282c34;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+}
+
+.update-product-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #61dafb;
+}
+
+.update-product-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.update-product-container label {
+    font-weight: bold;
+}
+
+.update-product-container input,
+.update-product-container textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 16px;
+    background-color: #444c56;
+    color: #ffffff;
+}
+
+.update-product-container textarea {
+    resize: vertical;
+}
+
+.update-product-container button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #61dafb;
+    color: #282c34;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.update-product-container button[type="submit"] {
+    background-color: #61dafb;
+}
+
+.update-product-container button[type="button"] {
+    background-color: #444c56;
+}
+
+.update-product-container button:hover {
+    background-color: #21a1f1;
+}

@@ -2,8 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaExclamationTriangle, FaCheckCircle } from 'react-icons/fa';
-import '../styles/ListProductComponent.css'; // Ensure this path is correct
+import { FaExclamationTriangle, FaCheckCircle, FaPlus, FaEdit } from 'react-icons/fa';
+import '../styles/ListProductComponent.css'; // تأكد من صحة هذا المسار
 
 const ListProductComponent = () => {
     const [products, setProducts] = useState([]);
@@ -43,8 +43,9 @@ const ListProductComponent = () => {
     return (
         <div className="list-product-container">
             <h2>List of Products</h2>
-            <button onClick={() => navigate('/add-product')}>Add Product</button>
-            <button onClick={fetchProducts}>Refresh Products</button>
+            <button onClick={() => navigate('/add-product')} className="add-button">
+                <FaPlus /> Add Product
+            </button>
             <table>
                 <thead>
                 <tr>
@@ -79,24 +80,17 @@ const ListProductComponent = () => {
                             <td>{product.färg}</td>
                             <td>{product.material}</td>
                             <td>
-                                {product.hasLowStock && (
-                                    <span title="Low Stock" className="warning-icon">
-                                            <FaExclamationTriangle />
-                                        </span>
-                                )}
-                                {product.hasExpired && (
-                                    <span title="Expired" className="warning-icon">
-                                            <FaExclamationTriangle />
-                                        </span>
-                                )}
-                                {!product.hasLowStock && !product.hasExpired && (
-                                    <span title="All Good" className="good-icon">
-                                            <FaCheckCircle />
-                                        </span>
-                                )}
+                                {product.hasLowStock && <span className="warning-icon"><FaExclamationTriangle /></span>}
+                                {product.hasExpired && <span className="warning-icon"><FaExclamationTriangle /></span>}
+                                {!product.hasLowStock && !product.hasExpired && <span className="good-icon"><FaCheckCircle /></span>}
                             </td>
                             <td>
-                                <Link to={`/edit-product/${product.id}`} className="edit-button">Edit</Link>
+                                <Link to={`/edit-product/${product.id}`} className="edit-button">
+                                    <FaEdit /> Edit
+                                </Link>
+                                <button onClick={() => handleDelete(product.id)} className="delete-button">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     ))

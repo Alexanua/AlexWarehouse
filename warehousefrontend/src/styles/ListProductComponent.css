@@ -6,6 +6,7 @@
     border-radius: 8px;
     padding: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Adds horizontal scroll */
 }
 
 .list-product-container h2 {
@@ -34,34 +35,39 @@
 }
 
 .list-product-container th, .list-product-container td {
-    padding: 8px 16px;
+    padding: 4px 8px; /* Reduced padding for smaller rows */
     border: 1px solid #ced4da;
+    font-size: 0.8em; /* Reduced font size for smaller text */
+    min-width: 80px; /* Minimum width for better content visibility */
 }
 
 .list-product-container th {
     background-color: #343a40;
     color: white;
+    font-size: 0.9em; /* Smaller font size for column titles if necessary */
 }
 
-.warning-icon {
-    color: orange;
+.warning-icon, .good-icon {
+    font-size: 1.5em; /* Enlarges the icons */
+    color: red; /* Makes the color more noticeable */
 }
 
 .good-icon {
     color: green;
 }
 
-.edit-button {
-    color: white;
+.edit-button, .delete-button {
+    font-size: 0.8em;
+    padding: 5px 10px; /* Reduced size to fit better in the table */
     background-color: #007bff;
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    padding: 8px 16px;
     text-decoration: none;
     display: inline-block;
 }
 
-.edit-button:hover {
+.edit-button:hover, .delete-button:hover {
     background-color: #0056b3;
 }

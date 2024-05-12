@@ -13,6 +13,7 @@ import AlertsComponent from './components/AlertsComponent';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
 import './App.css';
+import DeleteProductComponent from "./components/DeleteProductComponent.jsx";
 
 const App = () => {
     return (
@@ -23,13 +24,15 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<ListProductComponent />} />
                         <Route path="/add-product" element={<AddProductForm />} />
-                        <Route path="/edit-product/:id" element={<UpdateProductComponent />} />
+                        <Route path="/edit-product/:productId" element={<UpdateProductComponent />} />
                         <Route path="/suppliers" element={<ListSupplierComponent />} />
                         <Route path="/add-supplier" element={<AddSupplierComponent />} />
                         <Route path="/edit-supplier/:id" element={<UpdateSupplierComponent />} />
                         <Route path="/sales" element={<SaleList />} />
                         <Route path="/add-sale" element={<AddSale />} />
                         <Route path="/alerts" element={<AlertsComponent />} />
+                        <Route path="/delete-product/:productId" element={<DeleteProductComponent />} />
+
                     </Routes>
                 </div>
                 <FooterComponent />

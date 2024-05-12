@@ -1,6 +1,5 @@
 package warehouse.AlexWarehouse.produkt;
 
-// src/main/java/warehouse/AlexWarehouse/produkt/ProduktService.java
 
 import java.util.List;
 import java.util.Optional;

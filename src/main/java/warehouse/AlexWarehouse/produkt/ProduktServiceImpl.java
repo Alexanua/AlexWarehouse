@@ -1,4 +1,3 @@
-// src/main/java/warehouse/AlexWarehouse/produkt/ProduktServiceImpl.java
 package warehouse.AlexWarehouse.produkt;
 
 import org.slf4j.Logger;
