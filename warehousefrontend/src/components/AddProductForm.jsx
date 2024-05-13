@@ -37,15 +37,18 @@ const AddProductForm = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent the default form submission behavior
         try {
             const response = await axios.post('http://localhost:8081/produkter/createProdukt', product);
             console.log('Product Added:', response.data);
-            navigate('/products');
+            alert(`Product added successfully: ${JSON.stringify(response.data)}`);
+            navigate('/products'); // Redirect to the products list page
         } catch (error) {
             console.error('Failed to add product:', error);
+            alert('Failed to add product'); // Optionally provide feedback to the user
         }
     };
+
 
     return (
         <form onSubmit={handleSubmit}>

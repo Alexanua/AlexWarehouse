@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getSupplierById, updateSupplier, createSupplier } from '../service/supplierService';
+import "../styles/supplierStyles.css";
 
 const SupplierComponent = ({ isNew }) => {
     const [supplier, setSupplier] = useState({
@@ -16,8 +17,8 @@ const SupplierComponent = ({ isNew }) => {
     useEffect(() => {
         if (!isNew && id) {
             getSupplierById(id)
-                .then(data => setSupplier(data))
-                .catch(err => setError('Failed to fetch supplier details. Please try again.'));
+                .then(response => setSupplier(response.data))
+                .catch(() => setError('Failed to fetch supplier details. Please try again.'));
         }
     }, [id, isNew]);
 
@@ -33,8 +34,11 @@ const SupplierComponent = ({ isNew }) => {
             return;
         }
         try {
-            const response = isNew ? await createSupplier(supplier) : await updateSupplier(id, supplier);
-            console.log(`${isNew ? 'Added' : 'Updated'} Supplier:`, response);
+            if (isNew) {
+                await createSupplier(supplier);
+            } else {
+                await updateSupplier(id, supplier);
+            }
             navigate('/suppliers');
         } catch (error) {
             console.error('Error with supplier operation:', error);

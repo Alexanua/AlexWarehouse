@@ -1,124 +1,39 @@
-/* src/App.css */
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #121212;
-    color: #ffffff;
-    height: 100%;
-    width: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.app {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    background-color: #121212;
-}
-
-.content {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #1f1f1f;
-    color: #a0a0a0;
-    border-top: 1px solid #444;
-}
-
+/* Reverting back to a lighter, softer background for the table for better readability */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #1f1f1f;
-    border: 1px solid #444;
-    margin-bottom: 20px;
+    background-color: #ffffff; /* white background for the table */
+    color: #333; /* darker text for better readability */
 }
 
 th, td {
-    border: 1px solid #444;
-    padding: 10px;
-    text-align: left;
+    color: #333; /* dark grey text color */
+    background-color: #f9f9f9; /* very light grey for table cells */
 }
 
 th {
-    background-color: #323232;
+    background-color: #e9ecef; /* very light grey for headers, slightly darker than td */
 }
 
-td {
-    background-color: #282828;
+.button {
+    background-color: #007bff; /* Blue color for buttons */
+    color: white; /* white text for buttons */
 }
 
-button {
-    margin: 5px;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: #ffffff;
+.button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
-button:hover {
-    background-color: #0056b3;
+/* Error styling in case you are displaying error messages and want them to be subtle */
+.error {
+    color: #dc3545; /* Bootstrap's default danger color for errors */
+    background-color: #f8d7da; /* Light pink background for errors */
+    border-color: #f5c6cb; /* Light pink border for errors */
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #1f1f1f;
-    border-bottom: 1px solid #444;
-}
-
+/* Ensure links are clearly visible */
 .navbar-links a {
-    color: #007bff;
-    text-decoration: none;
-    margin: 0 15px;
+    color: #007bff; /* Blue link color */
 }
 
 .navbar-links a:hover {
-    color: #0056b3;
-}
-
-.header-container {
-    background-color: #007bff;
-    padding: 20px;
-    color: #ffffff;
-    text-align: center;
-    font-size: 1.5em;
-    border-radius: 8px;
-}
-
-.alert-container {
-    background-color: #1f1f1f;
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.alert-container h2 {
-    margin-top: 0;
-}
-
-.alert-container ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.alert-container li {
-    margin: 8px 0;
-    padding: 8px;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background-color: #282828;
+    color: #0056b3; /* Darker blue on hover */
 }
