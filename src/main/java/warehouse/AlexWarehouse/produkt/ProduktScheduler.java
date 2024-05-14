@@ -2,6 +2,8 @@ package warehouse.AlexWarehouse.produkt;
 
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import warehouse.AlexWarehouse.produkt.Produkt;
+import warehouse.AlexWarehouse.produkt.ProduktRepository;
 import warehouse.AlexWarehouse.service.NotificationService;
 
 import java.time.LocalDate;
@@ -22,32 +24,31 @@ public class ProduktScheduler {
         List<Produkt> lowStockProducts = produktRepository.findAllByLagerAntalLessThan(5);
 
         for (Produkt produkt : lowStockProducts) {
-            produkt.setHasLowStock(true);
+            System.out.println("Low stock alert for product: " + produkt.getNamn()); // Logging
             notificationService.sendLowStockAlert(produkt.getId(), produkt.getNamn(), produkt.getLagerAntal());
         }
-
-        produktRepository.saveAll(lowStockProducts);
     }
 
     @Scheduled(cron = "0 * * * * *") // كل دقيقة
-    public void checkProductExpiration() {
+    public void checkExpiredProducts() {
         LocalDate today = LocalDate.now();
         List<Produkt> expiredProducts = produktRepository.findAllByUtgångsdatumBefore(today);
 
         for (Produkt produkt : expiredProducts) {
-            produkt.setHasExpired(true);
+            System.out.println("Expiration alert for product: " + produkt.getNamn()); // Logging
             notificationService.sendProductExpirationNotification(produkt.getId(), produkt.getNamn(), produkt.getUtgångsdatum().toString());
         }
-
-        produktRepository.saveAll(expiredProducts);
     }
 
-    // استدعاء تحذيرات النقص مباشرة بعد الشراء
-    public void triggerLowStockCheck() {
-        checkLowStock();
-    }
+    @Scheduled(cron = "0 * * * * *") // كل دقيقة
+    public void checkExpiringSoonProducts() {
+        LocalDate today = LocalDate.now();
+        LocalDate thresholdDate = today.plusDays(5); // ضبط فترة الإنذار على 5 أيام
+        List<Produkt> expiringSoonProducts = produktRepository.findAllByUtgångsdatumBefore(thresholdDate);
 
-    public void triggerExpireCheck() {
-        checkProductExpiration();
+        for (Produkt produkt : expiringSoonProducts) {
+            System.out.println("Expiring soon alert for product: " + produkt.getNamn()); // Logging
+            notificationService.sendProductExpiringSoonNotification(produkt.getId(), produkt.getNamn(), produkt.getUtgångsdatum().toString());
+        }
     }
 }

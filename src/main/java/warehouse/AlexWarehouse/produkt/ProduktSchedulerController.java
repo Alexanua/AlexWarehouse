@@ -1,4 +1,3 @@
-// src/main/java/warehouse/AlexWarehouse/produkt/ProduktSchedulerController.java
 package warehouse.AlexWarehouse.produkt;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +15,7 @@ public class ProduktSchedulerController {
 
     @GetMapping("/test-expire-alert")
     public String testExpireAlert() {
-        produktScheduler.checkProductExpiration();
+        produktScheduler.checkExpiredProducts();
         return "Product expiration check triggered.";
     }
 
@@ -24,5 +23,11 @@ public class ProduktSchedulerController {
     public String testLowStockAlert() {
         produktScheduler.checkLowStock();
         return "Low stock alert check triggered.";
+    }
+
+    @GetMapping("/test-expiring-soon-alert")
+    public String testExpiringSoonAlert() {
+        produktScheduler.checkExpiringSoonProducts();
+        return "Expiring soon alert check triggered.";
     }
 }

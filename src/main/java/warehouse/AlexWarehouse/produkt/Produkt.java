@@ -1,4 +1,3 @@
-// src/main/java/warehouse/AlexWarehouse/produkt/Produkt.java
 package warehouse.AlexWarehouse.produkt;
 
 import jakarta.persistence.*;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import warehouse.AlexWarehouse.supplier.Supplier;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -44,12 +42,13 @@ public class Produkt {
     private String kategori;
 
     private double vikt;
-
+    private LocalDate expiryDate;
     private String bildUrl;
     private String status;
     private String dimensioner;
     private String färg;
     private String material;
+    private boolean isRead;
 
     @DecimalMin(value = "0.0", message = "Betyg måste vara إيجابي")
     private double betyg;

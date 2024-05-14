@@ -1,39 +1,24 @@
-/* Reverting back to a lighter, softer background for the table for better readability */
-table {
-    background-color: #ffffff; /* white background for the table */
-    color: #333; /* darker text for better readability */
+body, html, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-th, td {
-    color: #333; /* dark grey text color */
-    background-color: #f9f9f9; /* very light grey for table cells */
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-th {
-    background-color: #e9ecef; /* very light grey for headers, slightly darker than td */
+.main-content {
+    flex-grow: 1;
+    background-color: #f4f4f4; /* أو أي لون خلفية تريد */
+    padding: 20px;
 }
 
-.button {
-    background-color: #007bff; /* Blue color for buttons */
-    color: white; /* white text for buttons */
-}
-
-.button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-}
-
-/* Error styling in case you are displaying error messages and want them to be subtle */
-.error {
-    color: #dc3545; /* Bootstrap's default danger color for errors */
-    background-color: #f8d7da; /* Light pink background for errors */
-    border-color: #f5c6cb; /* Light pink border for errors */
-}
-
-/* Ensure links are clearly visible */
-.navbar-links a {
-    color: #007bff; /* Blue link color */
-}
-
-.navbar-links a:hover {
-    color: #0056b3; /* Darker blue on hover */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
 }

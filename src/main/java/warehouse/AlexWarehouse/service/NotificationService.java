@@ -1,53 +1,62 @@
-// src/main/java/warehouse/AlexWarehouse/service/NotificationService.java
 package warehouse.AlexWarehouse.service;
 
+import java.time.LocalDateTime;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import warehouse.AlexWarehouse.produkt.Produkt;
-import warehouse.AlexWarehouse.produkt.ProduktRepository;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class NotificationService {
-    private final ProduktRepository produktRepository;
-    private final List<String> alerts = new ArrayList<>();
+    @Autowired
+    private AlertRepository alertRepository;
 
-    public NotificationService(ProduktRepository produktRepository) {
-        this.produktRepository = produktRepository;
+    // إرسال تنبيه بانخفاض المخزون
+    public void sendLowStockAlert(Long productId, String productName, int stock) {
+        // منطق إرسال التنبيه
+        Alert alert = new Alert(productId, "Low Stock", "Low stock for product " + productName + " (ID: " + productId + "), stock: " + stock, LocalDateTime.now(), false);
+        alertRepository.save(alert);
+        System.out.println(alert.getMessage());
     }
 
-    public void sendLowStockAlert(Long produktId, String produktName, int lagerAntal) {
-        // In-app alert
-        Produkt produkt = produktRepository.findById(produktId).orElseThrow();
-        produkt.setHasLowStock(true);
-        produktRepository.save(produkt);
-
-        String alertMessage = String.format("Product %s has only %d items left.", produktName, lagerAntal);
-        alerts.add(alertMessage);
-
-        // Optionally log the alert
-        System.out.println(alertMessage);
+    // إرسال تنبيه بانتهاء صلاحية المنتج
+    public void sendProductExpirationNotification(Long productId, String productName, String expiryDate) {
+        // منطق إرسال التنبيه
+        Alert alert = new Alert(productId, "Expired", "Product " + productName + " (ID: " + productId + ") expired on " + expiryDate, LocalDateTime.now(), false);
+        alertRepository.save(alert);
+        System.out.println(alert.getMessage());
     }
 
-    public void sendProductExpirationNotification(Long produktId, String produktName, String expirationDate) {
-        // In-app alert
-        Produkt produkt = produktRepository.findById(produktId).orElseThrow();
-        produkt.setHasExpired(true);
-        produktRepository.save(produkt);
-
-        String alertMessage = String.format("Product %s expired on %s.", produktName, expirationDate);
-        alerts.add(alertMessage);
-
-        // Optionally log the alert
-        System.out.println(alertMessage);
+    // إرسال تنبيه باقتراب انتهاء صلاحية المنتج
+    public void sendProductExpiringSoonNotification(Long productId, String productName, String expiryDate) {
+        // منطق إرسال التنبيه
+        Alert alert = new Alert(productId, "Expiring Soon", "Product " + productName + " (ID: " + productId + ") is expiring soon on " + expiryDate, LocalDateTime.now(), false);
+        alertRepository.save(alert);
+        System.out.println(alert.getMessage());
     }
 
-    public List<String> getAllAlerts() {
-        return new ArrayList<>(alerts);
+    // إنشاء تنبيه جديد
+    public Alert createAlert(String message) {
+        Alert alert = new Alert(null, "Custom", message, LocalDateTime.now(), false);
+        return alertRepository.save(alert);
     }
 
+    // الحصول على جميع التنبيهات
+    public List<Alert> getAllAlerts() {
+        return alertRepository.findAll();
+    }
+
+    // تمييز التنبيه كمقروء
+    public void markAlertAsRead(Long id) {
+        System.out.println("Marking alert " + id + " as read");
+        Alert alert = alertRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Alert not found"));
+        alert.setRead(true);
+        alertRepository.save(alert);
+        System.out.println("Alert " + id + " marked as read");
+    }
+
+
+    // مسح جميع التنبيهات
     public void clearAlerts() {
-        alerts.clear();
+        alertRepository.deleteAll();
     }
 }
