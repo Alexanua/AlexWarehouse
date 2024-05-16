@@ -13,7 +13,7 @@ AlexWarehouse is a warehouse management system designed to streamline the manage
 - [License](#license)
 
 ## Features
-- **Product Management**: Add, update, delete, and list products.
+- **Product Management**: Add, update,  and list products.
 - **Supplier Management**: Manage supplier information linked to products.
 - **Sales Management**: Track and manage sales, with restrictions on updating or deleting sales.
 - **Alerts**: Notifications for low-stock and expired products.
@@ -86,3 +86,49 @@ The frontend interface covers the full screen with a dark background, with navig
    ```bash
    https://github.com/Alexanua/AlexWarehouse.git
    cd AlexWarehouse
+
+  ## Backend Setup
+
+- Ensure you have Java 17 and Maven installed.
+- Configure MySQL database with the following settings :
+spring.datasource.url=jdbc:mysql://localhost:3306/yourdb?useSSL=false&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=
+spring.jpa.hibernate.ddl-auto=update
+
+
+## Configuration
+The backend runs on port 8081 and connects to a MySQL database.
+Static resources are served from the frontend/build directory.
+Scheduled tasks for checking product alerts are configured to run every hour.
+
+
+## Run the Backend
+java -jar target/AlexWarehouse-0.0.1-SNAPSHOT.jar
+
+Contributing
+Contributions are welcome! Please follow these steps to contribute:
+
+## Fork the repository.
+Create a new branch (git checkout -b feature-branch).
+Make your changes.
+Commit your changes (git commit -m 'Add some feature').
+Push to the branch (git push origin feature-branch).
+Open a pull request.
+
+
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+
+
+
+
+
+
+
+
+
+
+
