@@ -1,4 +1,4 @@
-##AlexWarehouse
+#AlexWarehouse
 AlexWarehouse is a warehouse management system designed to streamline the management of products, suppliers, and sales. The system includes features for tracking low-stock and expired products, sending notifications, and managing product-related data efficiently.
 
 Table of Contents
