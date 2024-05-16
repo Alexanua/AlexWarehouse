@@ -84,5 +84,5 @@ The frontend interface covers the full screen with a dark background, with navig
 ## Installation
 1. Clone the repository
    ```bash
-   git clone https://github.com/your-username/AlexWarehouse.git
+   https://github.com/Alexanua/AlexWarehouse.git
    cd AlexWarehouse
