@@ -34,8 +34,7 @@ ProduktDTO.java: Data Transfer Object for product data.
 ProduktScheduler.java: Scheduler for checking product alerts.
 ProduktSchedulerController.java: Controller for managing scheduler operations.
 Frontend
-Components:
-
+Components
 AddProductForm.jsx: Form for adding new products.
 AddSale.jsx: Component for adding new sales.
 AddSupplierComponent.jsx: Form for adding new suppliers.
@@ -52,14 +51,12 @@ SaleList.jsx: Lists all sales.
 SupplierComponent.jsx: Displays detailed information about a supplier.
 UpdateProductComponent.jsx: Form for updating existing products.
 UpdateSupplierComponent.jsx: Form for updating existing suppliers.
-Services:
-
+Services
 productService.js: Service for managing product-related API calls.
 saleService.js: Service for managing sales-related API calls.
 supplierService.js: Service for managing supplier-related API calls.
 AlertService.js: Service for managing alert-related API calls.
-Styles:
-
+Styles
 App.css: General styles for the application.
 UpdateProductComponent.css: Styles for the UpdateProductComponent.
 ListProductComponent.css: Styles for the ListProductComponent.
@@ -67,26 +64,28 @@ HeaderComponent.css: Styles for the HeaderComponent.
 supplierStyles.css: Styles for supplier-related components.
 AlertsComponent.css: Styles for the AlertsComponent.
 index.css: Global styles.
-Other Files:
-
+Other Files
 App.jsx: Main application component.
+
 main.jsx: Entry point of the React application.
+
 .eslintrc.cjs: ESLint configuration file.
+
 file.env: Environment variables configuration.
+
 package.json: Project dependencies and scripts.
+
 The frontend interface covers the full screen with a dark background.
 
 Navigation options and a header displaying the application name.
 
 Installation
-Clone the repository:
-
+Clone the repository
 bash
 Copy code
 git clone https://github.com/your-username/AlexWarehouse.git
 cd AlexWarehouse
-Backend Setup:
-
+Backend Setup
 Ensure you have Java 17 and Maven installed.
 Configure MySQL database with the following settings:
 properties
@@ -99,8 +98,7 @@ Build the backend:
 bash
 Copy code
 mvn clean install -DskipTests
-Frontend Setup:
-
+Frontend Setup
 Navigate to the frontend directory:
 bash
 Copy code
@@ -118,13 +116,11 @@ The backend runs on port 8081 and connects to a MySQL database.
 Static resources are served from the frontend/build directory.
 Scheduled tasks for checking product alerts are configured to run every hour.
 Usage
-Run the Backend:
-
+Run the Backend
 bash
 Copy code
 java -jar target/AlexWarehouse-0.0.1-SNAPSHOT.jar
-Access the Frontend:
-
+Access the Frontend
 Open a browser and navigate to http://localhost:8081.
 Contributing
 Contributions are welcome! Please follow these steps to contribute:
@@ -135,6 +131,3 @@ Make your changes.
 Commit your changes (git commit -m 'Add some feature').
 Push to the branch (git push origin feature-branch).
 Open a pull request.
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
