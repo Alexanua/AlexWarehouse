@@ -1,9 +1,8 @@
-// src/components/ListProductComponent.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaExclamationTriangle, FaCheckCircle, FaPlus, FaEdit } from 'react-icons/fa';
-import '../styles/ListProductComponent.css'; // تأكد من صحة هذا المسار
+import '../styles/ListProductComponent.css';
 
 const ListProductComponent = () => {
     const [products, setProducts] = useState([]);
@@ -80,9 +79,26 @@ const ListProductComponent = () => {
                             <td>{product.färg}</td>
                             <td>{product.material}</td>
                             <td>
-                                {product.hasLowStock && <span className="warning-icon"><FaExclamationTriangle /></span>}
-                                {product.hasExpired && <span className="warning-icon"><FaExclamationTriangle /></span>}
-                                {!product.hasLowStock && !product.hasExpired && <span className="good-icon"><FaCheckCircle /></span>}
+                                {product.hasLowStock && (
+                                    <span className="warning-icon" title={`Low stock: ${product.lagerAntal} units`}>
+                                        <FaExclamationTriangle />
+                                    </span>
+                                )}
+                                {product.hasExpired && (
+                                    <span className="warning-icon" title={`Expired on: ${new Date(product.utgångsdatum).toLocaleDateString()}`}>
+                                        <FaExclamationTriangle />
+                                    </span>
+                                )}
+                                {product.expiresSoon && !product.hasExpired && (
+                                    <span className="warning-icon" title={`Expires soon on: ${new Date(product.utgångsdatum).toLocaleDateString()}`}>
+                                        <FaExclamationTriangle />
+                                    </span>
+                                )}
+                                {!product.hasLowStock && !product.hasExpired && !product.expiresSoon && (
+                                    <span className="good-icon" title="All good">
+                                        <FaCheckCircle />
+                                    </span>
+                                )}
                             </td>
                             <td>
                                 <Link to={`/edit-product/${product.id}`} className="edit-button">

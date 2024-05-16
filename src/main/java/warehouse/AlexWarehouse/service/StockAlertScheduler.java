@@ -4,6 +4,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import warehouse.AlexWarehouse.produkt.Produkt;
 import warehouse.AlexWarehouse.produkt.ProduktRepository;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,35 +18,45 @@ public class StockAlertScheduler {
         this.notificationService = notificationService;
     }
 
-    @Scheduled(cron = "0 * * * * *") // كل دقيقة
-    public void lowStockAlert() {
+    @Scheduled(cron = "0 * * * * *")
+    public void checkAllAlerts() {
+        checkLowStock();
+        checkExpiredProducts();
+        checkExpiringSoonProducts();
+    }
+
+    private void checkLowStock() {
         List<Produkt> lowStockProducts = produktRepository.findAllByLagerAntalLessThan(5);
 
         for (Produkt produkt : lowStockProducts) {
-            System.out.println("Low stock alert for product: " + produkt.getNamn()); // Logging
+            produkt.setHasLowStock(true);
+            produktRepository.save(produkt);
+            System.out.println("Low stock alert for product: " + produkt.getNamn());
             notificationService.sendLowStockAlert(produkt.getId(), produkt.getNamn(), produkt.getLagerAntal());
         }
     }
 
-    @Scheduled(cron = "0 * * * * *") // كل دقيقة
-    public void checkExpiredProducts() {
+    private void checkExpiredProducts() {
         LocalDate today = LocalDate.now();
         List<Produkt> expiredProducts = produktRepository.findAllByUtgångsdatumBefore(today);
 
         for (Produkt produkt : expiredProducts) {
-            System.out.println("Expiration alert for product: " + produkt.getNamn()); // Logging
+            produkt.setHasExpired(true);
+            produktRepository.save(produkt);
+            System.out.println("Expiration alert for product: " + produkt.getNamn());
             notificationService.sendProductExpirationNotification(produkt.getId(), produkt.getNamn(), produkt.getUtgångsdatum().toString());
         }
     }
 
-    @Scheduled(cron = "0 * * * * *") // كل دقيقة
-    public void checkExpiringSoonProducts() {
+    private void checkExpiringSoonProducts() {
         LocalDate today = LocalDate.now();
-        LocalDate thresholdDate = today.plusDays(5); // ضبط فترة الإنذار على 5 أيام
-        List<Produkt> expiringSoonProducts = produktRepository.findAllByUtgångsdatumBefore(thresholdDate);
+        LocalDate thresholdDate = today.plusDays(5); //
+        List<Produkt> expiringSoonProducts = produktRepository.findAllByUtgångsdatumBetween(today, thresholdDate);
 
         for (Produkt produkt : expiringSoonProducts) {
-            System.out.println("Expiring soon alert for product: " + produkt.getNamn()); // Logging
+            produkt.setExpiresSoon(true);
+            produktRepository.save(produkt);
+            System.out.println("Expiring soon alert for product: " + produkt.getNamn());
             notificationService.sendProductExpiringSoonNotification(produkt.getId(), produkt.getNamn(), produkt.getUtgångsdatum().toString());
         }
     }

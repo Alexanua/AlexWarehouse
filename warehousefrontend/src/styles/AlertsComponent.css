@@ -1,7 +1,72 @@
 /* src/styles/AlertsComponent.css */
+
 .alert-container {
-    background: #1e1e1e;
-    color: #ffffff;
-    padding: 16px;
+    background: #1e1e1e; /* Dark background for better contrast */
+    color: #ffffff; /* White text for readability */
+    padding: 20px;
     border-radius: 8px;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 80vh; /* Make it cover most of the viewport height */
+}
+
+.alert-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.alert-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.alert-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #333333; /* Slightly lighter background for list items */
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.alert-list li button {
+    background-color: #007bff; /* Blue button */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.alert-list li button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.alert-list li.read {
+    background: #444444; /* Different color for read alerts */
+    text-decoration: line-through;
+}
+
+.clear-button {
+    display: block;
+    width: 200px;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #dc3545; /* Red button */
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.clear-button:hover {
+    background-color: #c82333; /* Darker red on hover */
 }

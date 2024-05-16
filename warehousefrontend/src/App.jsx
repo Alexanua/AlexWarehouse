@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
 import ListProductComponent from './components/ListProductComponent';
@@ -15,8 +14,9 @@ import SaleList from './components/SaleList';
 import AddSale from './components/AddSale';
 import AlertsComponent from './components/AlertsComponent';
 import SaleDetail from './components/SaleDetail';
-import ProductComponent from './components/ProductComponent'; // If this needs direct access
-import SupplierComponent from './components/SupplierComponent'; // If this needs direct access
+import ProductComponent from './components/ProductComponent';
+import SupplierComponent from './components/SupplierComponent';
+import './styles/AlertsComponent.css'; // Lägg till denna rad
 
 const App = () => {
     return (
@@ -26,7 +26,6 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<ListProductComponent />} />
                     <Route path="/products" element={<ListProductComponent />} />
-
                     <Route path="/add-product" element={<AddProductForm />} />
                     <Route path="/edit-product/:productId" element={<UpdateProductComponent />} />
                     <Route path="/delete-product/:productId" element={<DeleteProductComponent />} />

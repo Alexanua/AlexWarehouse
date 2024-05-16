@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import '../App.css';
+import AlertService from '../service/AlertService';
+import '../styles/AlertsComponent.css';
 
 const AlertsComponent = () => {
     const [alerts, setAlerts] = useState([]);
@@ -13,7 +13,7 @@ const AlertsComponent = () => {
 
     const fetchAlerts = () => {
         console.log("Fetching alerts...");
-        axios.get('http://localhost:8081/api/alerts/getAllAlerts')
+        AlertService.fetchAlerts()
             .then((response) => {
                 console.log("Alerts fetched successfully", response.data);
                 setAlerts(response.data);
@@ -28,7 +28,7 @@ const AlertsComponent = () => {
 
     const markAsRead = (id) => {
         console.log(`Marking alert ${id} as read...`);
-        axios.put(`http://localhost:8081/api/alerts/markAsRead/${id}`)
+        AlertService.markAsRead(id)
             .then(() => {
                 console.log(`Alert ${id} marked as read`);
                 setAlerts(alerts.map(alert =>
@@ -43,7 +43,7 @@ const AlertsComponent = () => {
 
     const clearAlerts = () => {
         console.log("Clearing all alerts...");
-        axios.delete('http://localhost:8081/api/alerts/clearAlerts')
+        AlertService.clearAlerts()
             .then(() => {
                 console.log("All alerts cleared");
                 setAlerts([]);
@@ -55,11 +55,11 @@ const AlertsComponent = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="alert-container">Loading...</div>;
     }
 
     if (error) {
-        return <div>{error}</div>;
+        return <div className="alert-container">{error}</div>;
     }
 
     return (
@@ -67,17 +67,17 @@ const AlertsComponent = () => {
             <h2>Alerts</h2>
             {alerts.length > 0 ? (
                 <div>
-                    <ul>
+                    <ul className="alert-list">
                         {alerts.map((alert, index) => (
-                            <li key={index}>
-                                {alert.message}
+                            <li key={index} className={alert.isRead ? 'read' : ''}>
+                                <span>{alert.message}</span>
                                 {!alert.isRead && (
                                     <button onClick={() => markAsRead(alert.id)}>Mark as Read</button>
                                 )}
                             </li>
                         ))}
                     </ul>
-                    <button onClick={clearAlerts}>Clear All Alerts</button>
+                    <button className="clear-button" onClick={clearAlerts}>Clear All Alerts</button>
                 </div>
             ) : (
                 <p>No alerts</p>

@@ -50,7 +50,7 @@ public class Produkt {
     private String material;
     private boolean isRead;
 
-    @DecimalMin(value = "0.0", message = "Betyg måste vara إيجابي")
+    @DecimalMin(value = "0.0", message = "Betyg måste vara ")
     private double betyg;
 
     private String tillverkningsland;
@@ -71,6 +71,7 @@ public class Produkt {
 
     private boolean hasLowStock = false;
     private boolean hasExpired = false;
+    private boolean expiresSoon = false;
 
     public boolean isHasLowStock() {
         return hasLowStock;
@@ -86,5 +87,13 @@ public class Produkt {
 
     public void setHasExpired(boolean hasExpired) {
         this.hasExpired = hasExpired;
+    }
+
+    public boolean isExpiresSoon() {
+        return expiresSoon;
+    }
+
+    public void setExpiresSoon(boolean expiresSoon) {
+        this.expiresSoon = expiresSoon;
     }
 }
